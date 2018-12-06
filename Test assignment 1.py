@@ -2,7 +2,6 @@ import requests
 import shutil
 from pymongo import MongoClient
 from os import path, makedirs
-import time
 
 #соаздаём папки
 def createFolder(directory):
