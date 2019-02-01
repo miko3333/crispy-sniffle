@@ -86,9 +86,12 @@ def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
     FORMAT CSV
     """
 
+    test_time_str = time_str
+    train_time_str = time_str
+
     for i in range(0, days_to_train):
         if i==0:
-            train_datetime_from = datetime(*time.strptime(time_str, '%Y-%m-%d %H:%M:%S')[:6])
+            train_datetime_from = datetime(*time.strptime(train_time_str, '%Y-%m-%d %H:%M:%S')[:6])
         train_datetime_till = train_datetime_from + timedelta(days=1)
         train_datetime_till_clicks = train_datetime_till + timedelta(hours=2)
         views_train = cc.execute(clickhouse_query_template_views.format(', '.join(ch_fields), train_datetime_from, train_datetime_till))
@@ -103,7 +106,7 @@ def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
 
     for i in range(0, days_to_test):
         if i==0:
-            test_datetime_from = time_str - timedelta(days=days_to_train) - timedelta(days=days_to_test)
+            test_datetime_from = test_time_str - timedelta(days=days_to_test)
         test_datetime_till = test_datetime_from + timedelta(days=1)
         test_datetime_till_clicks = test_datetime_till + timedelta(hours=2)
         views_test = cc.execute(clickhouse_query_template_views.format(', '.join(ch_fields), test_datetime_from, test_datetime_till))
