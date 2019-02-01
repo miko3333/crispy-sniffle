@@ -65,7 +65,7 @@ def make_dataframe(views_data, click_data):
     full_df_test['click'] = np.where(full_df_test['click'] == 1, 1, 0)
     return full_df_test
 
-def iter_download_from_clickhouse_to_csv(initial_date, days_to_train, days_to_test):
+def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
     clickhouse_hosts = ['db101', 'db102', 'db103', 'db104', 'db105']
     cc = Client(random.choice(clickhouse_hosts), compression='lz4')
 
