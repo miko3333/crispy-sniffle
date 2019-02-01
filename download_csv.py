@@ -98,9 +98,10 @@ def iter_download_from_clickhouse_to_csv(initial_date, days_to_train, days_to_te
             raw_train_df.to_csv('train.csv', header='column_names')
         else: # else it exists so append without writing the header
             raw_train_df.to_csv('train.csv', mode='a', header=False)
+        time_str = train_datetime_till
 
     for i in range(0, days_to_test):
-        test_datetime_from = datetime(*time.strptime( test_time_str, '%Y-%m-%d %H:%M:%S')[:6]) - timedelta(days=days_to_test)
+        test_datetime_from = datetime(*time.strptime(time_str, '%Y-%m-%d %H:%M:%S')[:6]) - timedelta(days=days_to_test)
         test_datetime_till = test_datetime_from + timedelta(days=1)
         test_datetime_till_clicks = test_datetime_till + timedelta(hours=2)
         views_test = cc.execute(clickhouse_query_template_views.format(', '.join(ch_fields), test_datetime_from, test_datetime_till))
@@ -111,10 +112,11 @@ def iter_download_from_clickhouse_to_csv(initial_date, days_to_train, days_to_te
             raw_test_df.to_csv('test.csv', header='column_names')
         else: # else it exists so append without writing the header
             raw_test_df.to_csv('test.csv', mode='a', header=False)
+        time_str = test_datetime_till
     cc.disconnect()
 
 days_to_train = 1
 days_to_test = 1
 time_str = '2018-12-0 00:00:00'
 
-iter_download_to_csv(test_time_str, days_to_train, days_to_test)
+iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test)
