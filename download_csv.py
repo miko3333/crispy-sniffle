@@ -134,7 +134,7 @@ raw_test_df = make_dataframe(views_test, clicks_test)
 print(f'train shape {raw_train_df.shape}, clicks = {raw_train_df.click.sum()}, ctr = {(raw_train_df.click.sum() * 100 / raw_train_df.shape[0]):.3f}%')
 print(f'test shape {raw_test_df.shape}, clicks = {raw_test_df.click.sum()}, ctr = {(raw_test_df.click.sum() * 100 / raw_test_df.shape[0]):.3f}%')
 
-
+'''
 def df_features(data):
     data.rename(columns={"Sity": "City"})
     data.loc[:,'BrowserInfo'] = data['Browser'] + data['BrowserVersion']
@@ -154,7 +154,7 @@ def df_features(data):
     cols.pop(cols.index('click'))
     data = data[cols[1:]+['click']]
     return data
-
+'''
 
 raw_train_df = df_features(raw_train_df)
 raw_test_df = df_features(raw_test_df)
