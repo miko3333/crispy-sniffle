@@ -102,7 +102,7 @@ def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
             raw_train_df.to_csv('train.csv', header='column_names')
         else: # else it exists so append without writing the header
             raw_train_df.to_csv('train.csv', mode='a', header=False)
-        time_str = train_datetime_till
+        train_time_str = train_datetime_till
 
     for i in range(0, days_to_test):
         if i==0:
@@ -117,7 +117,7 @@ def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
             raw_test_df.to_csv('test.csv', header='column_names')
         else: # else it exists so append without writing the header
             raw_test_df.to_csv('test.csv', mode='a', header=False)
-        time_str = test_datetime_till
+        test_time_str = test_datetime_till
     cc.disconnect()
 
 days_to_train = 1
