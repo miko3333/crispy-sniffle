@@ -119,6 +119,6 @@ def iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test):
 
 days_to_train = 1
 days_to_test = 1
-time_str = '2018-12-0 00:00:00'
+time_str = '2018-12-1 00:00:00'
 
 iter_download_from_clickhouse_to_csv(time_str, days_to_train, days_to_test)
